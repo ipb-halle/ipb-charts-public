@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmapscripts
+data:
+  setup.sh: |
+    #!/bin/bash
+    echo "Hi!" >/tmp/configmapscript
+    sleep 30
+    export PGPASSWORD=secretpassword
+    echo "before prep-metchem" >>/tmp/configmapscript
+    curl --output - https://msbi.ipb-halle.de/~sneumann/prep-metchem-2016.sql.gz | zcat | psql --host 127.0.0.1 -U postgres
+    echo "before metchem" >>/tmp/configmapscript
+    curl --output - https://msbi.ipb-halle.de/~sneumann/metchem-2016.sql.gz | zcat | psql --host 127.0.0.1 -U postgres metchem
+    echo "after metchem" >>/tmp/configmapscript

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metfrag-settings
+data:
+  # Set as complete file contents (even JSON!)
+  settings.properties: |
+    NumberThreads = 2
+    UseSmiles = True
+    MetFragCandidateWriter = XLS
+    FeedbackEmailTo = metfrag@example.com
+    FeedbackEmailHost = mail.example.com
+    # metchem database settings
+    LocalMetChemDatabase=metchem
+    LocalMetChemDatabasePortNumber=5432
+    LocalMetChemDatabaseServerIp=metfrag-postgresql
+    LocalMetChemDatabaseUser=metchemro
+    LocalMetChemDatabasePassword=metchemro
+    # local database file folder
+    LocalDatabasesFolderForWeb = /vol/file_databases
