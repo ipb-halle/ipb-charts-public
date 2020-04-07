@@ -35,7 +35,7 @@ spec:
               containerPort: 8080
               protocol: TCP
           livenessProbe:
-            httpGet:
+            httpGet: 
               path: {{ .Values.webpath }}/javax.faces.resource/images/MetLogoCube_Green.png.xhtml
               port: 8080
           readinessProbe:
