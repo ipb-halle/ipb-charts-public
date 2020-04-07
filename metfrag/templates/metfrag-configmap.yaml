@@ -5,11 +5,11 @@ metadata:
 data:
   # Set as complete file contents (even JSON!)
   settings.properties: |
-    NumberThreads = 2
+    NumberThreads = {{ .Values.NumberThreads }}
     UseSmiles = True
     MetFragCandidateWriter = XLS
-    FeedbackEmailTo = metfrag@example.com
-    FeedbackEmailHost = mail.example.com
+    FeedbackEmailTo = {{ .Values.FeedbackEmailTo }}
+    FeedbackEmailHost = {{ .Values.FeedbackEmailHost }}
     # metchem database settings
     LocalMetChemDatabase=metchem
     LocalMetChemDatabasePortNumber=5432

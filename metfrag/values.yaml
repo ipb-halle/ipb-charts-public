@@ -4,6 +4,12 @@
 
 ## Global
 webpath: /MetFrag-deNBI
+webfqdn: metfrag.134.176.27.161.nip.io
+
+FeedbackEmailTo: metfrag@example.com
+FeedbackEmailHost: mail.example.com
+
+NumberThreads: 2
 
 replicaCount: 1
 
@@ -17,7 +23,8 @@ postgresql:
   persistence:
     enabled: yes
     size: "80Gi"
-    storageClassName: "nfs-client"
+    storageClassName: "longhorn"
+#    storageClassName: "nfs-client"
   initdbScriptsConfigMap: configmapscripts
 
 #  initdbScriptsConfigMap: configmapscripts
@@ -57,8 +64,8 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: metfrag.134.176.27.161.nip.io
-      paths: [ "/MetFrag-deNBI" ]
+    - host: {{ .Values.webfqdn }}
+      paths: [ {{ .Values.webpath }} ]
 
   tls: []
   #  - secretName: chart-example-tls
