@@ -62,7 +62,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: metfrag.134.176.27.161.nip.io
-      paths: /MetFrag-deNBI
+      paths: [ "/MetFrag-deNBI" ]
 
   tls: []
   #  - secretName: chart-example-tls
