@@ -68,8 +68,8 @@ ingress:
 
   tls:
     - secretName: metfrag-tls-secretName
-    hosts:
-      - metfrag.134.176.27.161.nip.io
+      hosts:
+        - metfrag.134.176.27.161.nip.io
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
