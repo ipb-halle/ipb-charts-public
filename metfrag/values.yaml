@@ -60,9 +60,9 @@ service:
 ingress:
   enabled: true
   annotations:
-#    nginx.ingress.kubernetes.io/affinity: cookie
-    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
     cert-manager.io/issuer: "metfrag-tls-issuer"
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
   hosts:
     - host: jenkins.phenomenal-h2020.eu
 
