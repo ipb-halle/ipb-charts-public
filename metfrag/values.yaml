@@ -60,16 +60,16 @@ service:
 ingress:
   enabled: true
   annotations:
-    nginx.ingress.kubernetes.io/affinity: cookie
-    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
+#    nginx.ingress.kubernetes.io/affinity: cookie
+#    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
     cert-manager.io/issuer: "metfrag-tls-issuer"
   hosts:
     - host: jenkins.phenomenal-h2020.eu
 
   tls:
-    - secretName: metfrag-tls-secretName
+    - secretName: metfrag-cert
       hosts:
-        - jenkins.phenomenal-h2020.eu       
+        - jenkins.phenomenal-h2020.eu
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
