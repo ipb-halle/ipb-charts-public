@@ -22,15 +22,15 @@ spec:
 {{- if .Values.ingress.tls }}
   tls:
   - hosts:
-    - {{ .Values.ingress.hosts.host }}
+      - {{ index .Values.ingress.hosts 0 | quote }}
     secretName: {{ .secretName }}
 {{- end }}
   rules:
-    - host: {{ .host | quote }}
-      http:
-        paths:
-          - path: {{ .Values.webpath }}
-            backend:
-              serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
+  - host: {{ index .Values.ingress.hosts 0 | quote }}
+    http:
+      paths:
+        - path: {{ .Values.webpath }}
+          backend:
+            serviceName: {{ $fullName }}
+            servicePort: {{ $svcPort }}
 {{- end }}
