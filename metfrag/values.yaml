@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 ## Global
-FeedbackEmailTo: metfrag@example.com
+FeedbackEmailTo: sneumann@ipb-halle.de
 FeedbackEmailHost: mail.example.com
 
 webpath: /MetFrag-deNBI
@@ -68,6 +68,8 @@ ingress:
 
   tls:
     - secretName: metfrag-tls-secretName
+    hosts:
+      - metfrag.134.176.27.161.nip.io
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
