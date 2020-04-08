@@ -64,12 +64,12 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-body-size: "500m"
     cert-manager.io/issuer: "metfrag-tls-issuer"
   hosts:
-    - host: metfrag.134.176.27.161.nip.io
+    - host: jenkins.phenomenal-h2020.eu
 
   tls:
     - secretName: metfrag-tls-secretName
       hosts:
-        - metfrag.134.176.27.161.nip.io
+        - jenkins.phenomenal-h2020.eu       
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
