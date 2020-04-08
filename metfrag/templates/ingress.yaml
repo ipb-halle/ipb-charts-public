@@ -13,9 +13,6 @@ metadata:
     {{- include "metfrag.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
-     nginx.ingress.kubernetes.io/affinity: cookie
-     nginx.ingress.kubernetes.io/proxy-body-size: "500m"
-     cert-manager.io/issuer: {{ .Release.Name }}-issuer
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
