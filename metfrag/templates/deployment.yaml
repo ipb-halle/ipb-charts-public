@@ -21,6 +21,13 @@ spec:
       serviceAccountName: {{ include "metfrag.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: postgres-listener
+          image: alpine
+          command:
+            - bash
+            - -c
+            - for i in $(seq 1 200); do nc -z -w3 metfrag-postgresql 5432 && exit 0 || sleep $((2*i)); echo -n "." ; done; exit 1
       containers:
         - name: {{ .Chart.Name }}
           volumeMounts:
@@ -35,7 +42,7 @@ spec:
               containerPort: 8080
               protocol: TCP
           livenessProbe:
-            httpGet: 
+            httpGet:
               path: {{ .Values.webpath }}/javax.faces.resource/images/MetLogoCube_Green.png.xhtml
               port: 8080
           readinessProbe:
