@@ -3,11 +3,10 @@
 # Declare variables to be passed into your templates.
 
 ## Global
-webpath: /MetFrag-deNBI
-webfqdn: metfrag.134.176.27.161.nip.io
-
-FeedbackEmailTo: metfrag@example.com
+FeedbackEmailTo: sneumann@ipb-halle.de
 FeedbackEmailHost: mail.example.com
+
+webpath: /MetFrag-deNBI
 
 NumberThreads: 2
 
@@ -60,17 +59,17 @@ service:
 
 ingress:
   enabled: true
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  annotations:
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
+    cert-manager.io/issuer: "metfrag-tls-issuer"
   hosts:
-    - host: {{ .Values.webfqdn }}
-      paths: [ {{ .Values.webpath }} ]
+    - host: jenkins.phenomenal-h2020.eu
 
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+    - secretName: metfrag-cert
+      hosts:
+        - jenkins.phenomenal-h2020.eu
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
