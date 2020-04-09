@@ -28,6 +28,7 @@ declared as `webpath` (currently without trailing slash, not sure if that
   is a requirement).
 
 The full URL then becomes http(s)://webfqdn/webpath
+For a root configuration use "/".
 
 ### Configuring Lets Encrypt tls
 
