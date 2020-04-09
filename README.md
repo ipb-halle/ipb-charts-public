@@ -18,9 +18,12 @@ declared as `webpath` (currently without trailing slash, not sure if that
 
 The full URL then becomes http(s)://webfqdn/webpath
 
+### COnfiguring Lets Encrypt tls
 
-
-
+To enable Lets Encrypt https certificates, you need to provide
+1) a valid eMail (not some @example.com address) and a real DNS name,
+i.e. `metfrag.u.v.w.x.nip.io` usually won't work. Also, you need
+a working cert-manager in your K8S cluster.
 
 ## Usage with Helm
 
@@ -43,6 +46,12 @@ rancher catalog add --branch master ipb-charts-public https://github.com/ipb-hal
 Once the catalog is imported, you can install MetFrag with
 ```
 rancher app install metfrag
+
+## Or even provide a few settings:
+rancher apps install -n metfragdenbi --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=longhorn --set webpath=/MetFrag-deNBI --set ingress.enabled=true metfrag metfrag
+
+
+
 ```
 
 ### Rancher Web GUI
