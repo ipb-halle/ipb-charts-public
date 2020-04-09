@@ -5,6 +5,17 @@ Packaging of applications for Kubernetes as Helm charts or Rancher Apps
 
 Only a few properties *have* to be configured for each site and installation:
 
+## MetFrag
+
+You can install the MetFrag web applications
+
+During the very first installation, the postgres file is filled
+with (among others) the PostGres database. This can take around six hours,
+depending on the speed and I/O in your kubernetes cluster. Since that data
+will be persisted, subsequent starts are much faster. Note: if you allow
+rancher/helm to create a random app name (and not a fixed, say "metfrag"),
+EACH initialisation will create its own database, taking hours to fill.
+
 ### Hostname for the ingress
 
 The apps such as MetFrag will be available at a particular URL,
@@ -18,7 +29,7 @@ declared as `webpath` (currently without trailing slash, not sure if that
 
 The full URL then becomes http(s)://webfqdn/webpath
 
-### COnfiguring Lets Encrypt tls
+### Configuring Lets Encrypt tls
 
 To enable Lets Encrypt https certificates, you need to provide
 1) a valid eMail (not some @example.com address) and a real DNS name,
@@ -50,6 +61,8 @@ rancher app install metfrag
 ## Or even provide a few settings:
 rancher apps install -n metfragdenbi --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=longhorn --set webpath=/MetFrag-deNBI --set ingress.enabled=true metfrag metfrag
 
+## Or for IPB:
+rancher apps install -n metfraghelm --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=nfs-client --set webpath=/MetFrag-deNBI --set ingress.enabled=true metfrag metfrag
 
 
 ```

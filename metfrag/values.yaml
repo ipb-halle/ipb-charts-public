@@ -65,10 +65,10 @@ ingress:
   hosts:
     - host: jenkins.phenomenal-h2020.eu
 
-  tls:
-    - secretName: metfrag-cert
-      hosts:
-        - jenkins.phenomenal-h2020.eu
+  tls: []
+#    - secretName: metfrag-cert
+#      hosts:
+#        - jenkins.phenomenal-h2020.eu
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
