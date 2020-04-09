@@ -3,10 +3,10 @@
 # Declare variables to be passed into your templates.
 
 ## Global
-FeedbackEmailTo: sneumann@ipb-halle.de
+FeedbackEmailTo: nobody@example.com
 FeedbackEmailHost: mail.example.com
 
-webpath: /MetFrag-deNBI
+webpath: /
 
 NumberThreads: 2
 
@@ -22,7 +22,6 @@ postgresql:
   persistence:
     enabled: yes
     size: "80Gi"
-    storageClassName: "longhorn"
 #    storageClassName: "nfs-client"
   initdbScriptsConfigMap: configmapscripts
 
@@ -58,7 +57,7 @@ service:
   port: 80
 
 ingress:
-  enabled: true
+  enabled: false
   annotations:
     nginx.ingress.kubernetes.io/affinity: cookie
     nginx.ingress.kubernetes.io/proxy-body-size: "500m"
@@ -66,10 +65,10 @@ ingress:
   hosts:
     - host: jenkins.phenomenal-h2020.eu
 
-  tls:
-    - secretName: metfrag-cert
-      hosts:
-        - jenkins.phenomenal-h2020.eu
+  tls: []
+#    - secretName: metfrag-cert
+#      hosts:
+#        - jenkins.phenomenal-h2020.eu
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

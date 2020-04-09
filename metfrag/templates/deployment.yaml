@@ -43,11 +43,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: {{ .Values.webpath }}/javax.faces.resource/images/MetLogoCube_Green.png.xhtml
+              path: {{ trimSuffix "/" .Values.webpath }}/javax.faces.resource/images/MetLogoCube_Green.png.xhtml
               port: 8080
           readinessProbe:
             httpGet:
-              path: {{ .Values.webpath }}/javax.faces.resource/images/MetLogoCube_Green.png.xhtml
+              path: {{ trimSuffix "/" .Values.webpath }}/javax.faces.resource/images/MetLogoCube_Green.png.xhtml
               port: 8080
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
