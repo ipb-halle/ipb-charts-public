@@ -5,6 +5,9 @@ metadata:
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
+  selector:
+    matchLabels:
+      {{- include "k8sticket.selectorLabels" . | nindent 6 }}
   revisionHistoryLimit: 10
   strategy:
     rollingUpdate:

@@ -37,6 +37,7 @@ Common labels
 {{- define "metfrag.labels" -}}
 helm.sh/chart: {{ include "metfrag.chart" . }}
 {{ include "metfrag.selectorLabels" . }}
+{{ include "k8sticket.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -48,6 +49,10 @@ Selector labels
 */}}
 {{- define "metfrag.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "metfrag.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+{{- define "k8sticket.selectorLabels" -}}
+app.kubernetes.io/name: "k8sticket"
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
