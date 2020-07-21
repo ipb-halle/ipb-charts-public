@@ -7,7 +7,6 @@ metadata:
     k8sTicket: "true"
   annotations:
     ipb-halle.de/k8sticket.deployment.app: {{ include "metfrag.fullname" . }}
-
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -20,7 +19,7 @@ spec:
         ipb-halle.de/k8sticket.deployment.app: {{ include "metfrag.fullname" . }}
       annotations:
         ipb-halle.de/k8sTicket.path: {{ trimSuffix "/" .Values.webpath }}
-        ipb-halle.de/k8sTicket.port: "8080"        
+        ipb-halle.de/k8sTicket.port: "8080"
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
