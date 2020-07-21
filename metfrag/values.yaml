@@ -16,6 +16,11 @@ image:
   repository: ipbhalle/metfragweb
   pullPolicy: IfNotPresent
 
+usek8sTicket: "true"
+
+metfrag:
+  labels: 
+  
 postgresql:
   postgresqlPassword: "secretpassword"
   postgresqlDatabase: "metchem"

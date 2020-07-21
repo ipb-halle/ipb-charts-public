@@ -4,6 +4,10 @@ metadata:
   name: {{ include "metfrag.fullname" . }}
   labels:
     {{- include "metfrag.labels" . | nindent 4 }}
+    k8sTicket: "true"
+  annotations:
+    ipb-halle.de/k8sticket.deployment.app: {{ include "metfrag.fullname" . }}
+
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -13,6 +17,10 @@ spec:
     metadata:
       labels:
         {{- include "metfrag.selectorLabels" . | nindent 8 }}
+        ipb-halle.de/k8sticket.deployment.app: {{ include "metfrag.fullname" . }}
+      annotations:
+        ipb-halle.de/k8sTicket.path: {{ trimSuffix "/" .Values.webpath }}
+        ipb-halle.de/k8sTicket.port: "8080"        
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

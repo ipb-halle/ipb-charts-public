@@ -32,6 +32,6 @@ spec:
       paths:
         - path: {{ .Values.webpath }}
           backend:
-            serviceName: {{ $fullName }}
-            servicePort: {{ $svcPort }}
+            serviceName: k8sticket-service
+            servicePort: 9001
 {{- end }}
