@@ -16,11 +16,12 @@ image:
   repository: ipbhalle/metfragweb
   pullPolicy: IfNotPresent
 
-usek8sTicket: "true"
+k8sTicket:
+  enabled: "true"
 
 metfrag:
-  labels: 
-  
+  labels:
+
 postgresql:
   postgresqlPassword: "secretpassword"
   postgresqlDatabase: "metchem"
