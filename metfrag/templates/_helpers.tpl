@@ -61,7 +61,6 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 {{- define "k8sticket.selectorLabels" -}}
 app.kubernetes.io/name: "k8sticket"
-app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
 {{/*

@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       labels:
-        app: k8sTicket
+        {{- include "k8sticket.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - image: ipbhalle/k8sticket
