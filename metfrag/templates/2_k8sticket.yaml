@@ -20,7 +20,7 @@ spec:
         app: k8sTicket
     spec:
       containers:
-      - image: ipb-halle/k8sticket
+      - image: ipbhalle/k8sticket
         imagePullPolicy: Always
         name: k8sticket
         ports:
