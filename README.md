@@ -65,6 +65,8 @@ rancher apps install -n metfragdenbi --set FeedbackEmailTo=sneumann@ipb-halle.de
 ## Or for IPB:
 rancher apps install -n metfraghelm --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=nfs-client --set webpath=/MetFrag-deNBI --set ingress.enabled=true metfrag metfrag
 
+## And with the cool k8sTicket system:
+rancher apps install -n metfraghelm --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=nfs-client --set webpath=/MetFrag-deNBI --set ingress.enabled=true --set k8sTicket.enabled=true metfrag metfrag
 
 ```
 
