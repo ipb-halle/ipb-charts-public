@@ -22,7 +22,7 @@ rules:
   - update
   - delete
 - apiGroups:
-  - ""
+  - apps
   resources:
   - deployments
   verbs:
@@ -33,7 +33,6 @@ rules:
   - "apps"
   resources:
   - PartialObjectMetadata
-  - namespaces
   verbs:
   - list
   - get
