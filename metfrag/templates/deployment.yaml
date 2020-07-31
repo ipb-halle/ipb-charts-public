@@ -16,9 +16,9 @@ spec:
     metadata:
       labels:
         {{- include "metfrag.selectorLabels" . | nindent 8 }}
-        ipb-halle.de/k8sticket.deployment.app.name: {{ trimSuffix "/" .Values.webpath }}
+        ipb-halle.de/k8sticket.deployment.app.name: {{ trim "/" .Values.webpath }}
       annotations:
-        ipb-halle.de/k8sticket.path: {{ trimSuffix "/" .Values.webpath }}
+        ipb-halle.de/k8sticket.path: {{ trim "/" .Values.webpath }}
         ipb-halle.de/k8sticket.port: "8080"
     spec:
     {{- with .Values.imagePullSecrets }}
