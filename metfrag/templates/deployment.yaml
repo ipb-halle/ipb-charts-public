@@ -6,7 +6,7 @@ metadata:
     {{- include "metfrag.labels" . | nindent 4 }}
     ipb-halle.de/k8sticket: "true"
   annotations:
-    ipb-halle.de/k8sticket.deployment.app.name: {{ trimSuffix "/" .Values.webpath }}
+    ipb-halle.de/k8sticket.deployment.app.name: {{ trimAll "/" .Values.webpath }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
