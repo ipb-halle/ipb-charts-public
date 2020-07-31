@@ -4,13 +4,12 @@ metadata:
   name: k8sticket-service
 spec:
   ports:
-  - name: gmweb
+  - name: metfrag
     port: 9001
     protocol: TCP
     targetPort: 9001
   selector:
-    app: k8sTicket
+    {{- include "k8sticket.labels" . | nindent 4 }}
   sessionAffinity: None
-  type: ClusterIP
 status:
   loadBalancer: {}
