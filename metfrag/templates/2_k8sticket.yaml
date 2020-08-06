@@ -1,3 +1,4 @@
+{{- if .Values.k8sTicket.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -46,3 +47,4 @@ spec:
       serviceAccount: k8sticket-watcher
       serviceAccountName: k8sticket-watcher
       terminationGracePeriodSeconds: 30
+{{- end -}}

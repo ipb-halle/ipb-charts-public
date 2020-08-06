@@ -36,11 +36,31 @@ Common labels
 */}}
 {{- define "metfrag.labels" -}}
 helm.sh/chart: {{ include "metfrag.chart" . }}
+{{- if .Values.k8sTicket.enabled }}
+ipb-halle.de/k8sticket: "true"
+{{- end }}
 {{ include "metfrag.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end -}}
+{{- define "metfrag.annotations" -}}
+{{- if .Values.k8sTicket.enabled }}
+ipb-halle.de/k8sticket.deployment.app.name: {{ trimAll "/" .Values.webpath }}
+ipb-halle.de/k8sticket.ingress.dns: "true"
+{{- end }}
+{{- end -}}
+{{- define "metfrag.pod.template.annotations" -}}
+{{- if .Values.k8sTicket.enabled }}
+ipb-halle.de/k8sticket.pod.path: {{ trimAll "/" .Values.webpath }}
+ipb-halle.de/k8sticket.pod.port: "8080"
+{{- end }}
+{{- end -}}
+{{- define "metfrag.pod.template.labels" -}}
+{{- if .Values.k8sTicket.enabled }}
+ipb-halle.de/k8sticket.deployment.app.name: {{ trimAll "/" .Values.webpath }}
+{{- end }}
 {{- end -}}
 
 {{- define "k8sticket.labels" -}}

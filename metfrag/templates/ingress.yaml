@@ -32,6 +32,11 @@ spec:
       paths:
         - path: {{ .Values.webpath }}
           backend:
+            {{- if .Values.k8sTicket.enabled }}
             serviceName: k8sticket-service
             servicePort: 9001
+            {{- else }}
+            serviceName: {{ include "metfrag.fullname" . }}
+            servicePort: {{ .Values.service.port }}
+            {{- end }}
 {{- end }}

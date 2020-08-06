@@ -1,3 +1,4 @@
+{{- if .Values.k8sTicket.enabled -}}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -51,3 +52,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: k8sticket-watcher
+{{- end -}}
