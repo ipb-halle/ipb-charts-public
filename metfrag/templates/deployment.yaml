@@ -16,7 +16,6 @@ spec:
       labels:
         {{- include "metfrag.selectorLabels" . | nindent 8 }}
         {{- include "metfrag.pod.template.labels" . | nindent 8 }}
-        ipb-halle.de/k8sticket.deployment.app.name: {{ trimAll "/" .Values.webpath }}
       annotations:
         {{- include "metfrag.pod.template.annotations" . | nindent 8 }}
     spec:
