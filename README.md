@@ -63,8 +63,7 @@ rancher app install metfrag
 rancher apps install -n metfragdenbi --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=longhorn --set webpath=/MF --set ingress.enabled=true --set ingress.tls[0].secretName=metfrag-cert --set ingress.tls[0].hosts[0]=metfrag-cert metfrag metfrag
 
 ## Or for IPB:
-rancher apps install -n metfraghelm --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=nfs-client --set webpath=/MetFrag-deNBI --set ingress.enabled=true metfrag metfrag
-
+rancher apps install -n metfragbeta --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=nfs-client --set webpath=/MetFragBeta --set ingress.enabled=true --set ingress.hosts[0].host=msbi.ipb-halle.de metfrag metfrag
 
 ```
 
