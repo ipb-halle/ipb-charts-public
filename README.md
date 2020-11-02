@@ -64,7 +64,8 @@ rancher apps install -n metfragdenbi --set FeedbackEmailTo=sneumann@ipb-halle.de
 
 ## Or for IPB:
 rancher apps install -n metfragbeta --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=nfs-client --set webpath=/MetFragBeta --set ingress.enabled=true --set ingress.hosts[0].host=msbi.ipb-halle.de metfrag metfrag
-
+# and parallel a deNBI variant @ IPB:
+rancher apps install -n metfraghelm --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=nfs-client-unity --set webpath=/MetFrag-deNBI --set ingress.enabled=true --set ingress.hosts[0].host=msbi.ipb-halle.de metfrag metfrag-denbi
 ```
 
 ### Rancher Web GUI
