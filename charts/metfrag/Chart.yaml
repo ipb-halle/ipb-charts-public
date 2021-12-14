@@ -8,5 +8,6 @@ icon: https://msbi.ipb-halle.de/MetFragLogo232x128.png
 
 dependencies:
   - name: postgresql
-    version: 8.6.1
-    repository: http://storage.googleapis.com/kubernetes-charts
+    version: '~8.6.1'
+    repository: https://charts.bitnami.com/bitnami
+    
