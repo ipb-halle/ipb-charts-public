@@ -52,7 +52,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: goldenmutagenesis.10.22.14.6.nip.io
+    - host: msbi.ipb-halle.de
       paths:
         - path: /GoldenMutagenesisWeb(/|$)(.*)
           pathType: ImplementationSpecific

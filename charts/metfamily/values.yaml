@@ -54,7 +54,7 @@ ingress:
      nginx.ingress.kubernetes.io/rewrite-target: /$2
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: metfamilydevel.10.22.14.6.nip.io #msbi.ipb-halle.de
+    - host: msbi.ipb-halle.de
       paths:
         - path: /MetFamily(/|$)(.*)
           pathType: ImplementationSpecific

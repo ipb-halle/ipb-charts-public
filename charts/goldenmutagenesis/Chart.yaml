@@ -2,6 +2,6 @@ apiVersion: v2
 name: goldenmutagenesis
 description: A Helm chart for GoldenMutagenesisWeb, supporting rapid design of primers for amino acid exchanges and saturation mutagenesis by Golden Gate cloning
 type: application
-version: 0.1.2
+version: 0.1.3
 appVersion: "latest"
 icon: https://msbi.ipb-halle.de/gmweb_logo128x128.png
