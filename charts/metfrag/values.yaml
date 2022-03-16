@@ -17,6 +17,7 @@ image:
   pullPolicy: Always
 
 postgresql:
+  fullnameOverride: "metfrag-postgresql"
   postgresqlPassword: "secretpassword"
   postgresqlDatabase: "metchem"
   persistence:
