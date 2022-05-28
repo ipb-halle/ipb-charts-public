@@ -36,6 +36,17 @@ entries:
   metfamily:
   - apiVersion: v2
     appVersion: latest
+    created: "2022-05-28T08:40:44.094128271Z"
+    description: A Helm chart for the MetFamily web application
+    digest: 845ee7de2c84a861ea45f541a261b7588b46242482a3de2fc9de6b64ef1d4c2a
+    icon: https://msbi.ipb-halle.de/MetFamily_Logo380x128.png
+    name: metfamily
+    type: application
+    urls:
+    - https://github.com/ipb-halle/ipb-charts-public/releases/download/metfamily-0.1.3/metfamily-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-12-15T16:33:03.770671944Z"
     description: A Helm chart for the MetFamily web application
     digest: 588cde2ee4362a4cab5a70060dbdf0364f7c2e4b95bbd96d1049d7682d57cb61
