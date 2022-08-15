@@ -18,3 +18,5 @@ data:
     LocalMetChemDatabasePassword=metchemro
     # local database file folder
     LocalDatabasesFolderForWeb = /vol/file_databases
+    # Spectral library folder
+    OfflineSpectralDatabaseFile = /vol/spectral_databases

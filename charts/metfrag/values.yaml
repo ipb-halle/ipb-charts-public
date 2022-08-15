@@ -7,7 +7,6 @@ FeedbackEmailTo: nobody@example.com
 FeedbackEmailHost: mail.example.com
 
 webpath: /
-
 NumberThreads: 2
 
 replicaCount: 1
@@ -15,6 +14,11 @@ replicaCount: 1
 image:
   repository: ipbhalle/metfragweb
   pullPolicy: Always
+
+storage:
+  volumes:
+    - name: spectral_databases
+      emptyDir: {}
 
 postgresql:
   fullnameOverride: "metfrag-postgresql"
