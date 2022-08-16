@@ -17,7 +17,7 @@ image:
 
 storage:
   volumes:
-    - name: spectral_databases
+    - name: spectral-databases
       emptyDir: {}
 
 postgresql:
