@@ -59,6 +59,21 @@ entries:
   metfrag:
   - apiVersion: v2
     appVersion: latest
+    created: "2023-01-24T09:22:19.365850909Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~11
+    description: A Helm chart for the MetFrag application
+    digest: 974595f96e863f83e5656546a27c7bf843803b328ab3f2d2e12c6eb451c2b031
+    icon: https://msbi.ipb-halle.de/MetFragLogo232x128.png
+    name: metfrag
+    type: application
+    urls:
+    - https://github.com/ipb-halle/ipb-charts-public/releases/download/metfrag-0.1.13/metfrag-0.1.13.tgz
+    version: 0.1.13
+  - apiVersion: v2
+    appVersion: latest
     created: "2022-08-17T07:49:13.978129539Z"
     dependencies:
     - name: postgresql
