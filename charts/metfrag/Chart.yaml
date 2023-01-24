@@ -8,5 +8,5 @@ icon: https://msbi.ipb-halle.de/MetFragLogo232x128.png
 
 dependencies:
   - name: postgresql
-    version: '~11.0.0'
+    version: '~11'
     repository: https://charts.bitnami.com/bitnami
