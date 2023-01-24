@@ -39,43 +39,16 @@ a working cert-manager in your K8S cluster.
 
 ## Usage with Helm
 
-help pleeze !
+Helm (https://helm.sh/) is a package manager for Kubernetes applications,
+which are described and installed through so-called charts. Charts are hosted
+locally or in repositories.
 
-## Usage with Rancher
-
-Rancher (https://rancher.com/) is a Kubernetes distribution and management system.
-Their concept of "Apps" is built upon the ideas in Helm, and in general Helm charts should be compatible and deployable as Rancher "Apps".
-
-### Command Line Interface (CLI)
-
-The rancher CLI (https://rancher.com/docs/rancher/v2.x/en/cli/)
-allows to add this repository as App catalog and to install MetFrag:
-
+First add the IPB charts repo to your helm:
 ```
-rancher catalog add --branch master ipb-charts-public https://github.com/ipb-halle/ipb-charts-public.git
+helm repo add ipb-public https://ipb-halle.github.io/ipb-charts-public/
 ```
 
-Once the catalog is imported, you can install MetFrag with
+Then install e.g. MetFrag into the Kubernetes metfragbeta namespace:
 ```
-rancher app install metfrag
-
-## Or even provide a few settings:
-rancher apps install -n metfragdenbi --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=longhorn --set webpath=/MF --set ingress.enabled=true --set ingress.tls[0].secretName=metfrag-cert --set ingress.tls[0].hosts[0]=metfrag-cert --set ingress.hosts[0].host=jenkins.phenomenal-h2020.eu metfrag metfrag
-
-## Or for IPB:
-rancher apps install -n metfragbeta --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=nfs-client --set webpath=/MetFragBeta --set ingress.enabled=true --set ingress.hosts[0].host=msbi.ipb-halle.de metfrag metfrag
-# and parallel a deNBI variant @ IPB:
-rancher apps install -n metfraghelm --set FeedbackEmailTo=sneumann@ipb-halle.de --set persistence.storageClass=nfs-client-unity --set webpath=/MetFrag-deNBI --set ingress.enabled=true --set ingress.hosts[0].host=msbi.ipb-halle.de metfrag metfrag-denbi
+helm install metfrag --values metfrag-beta.yaml -n metfragbeta ipb-public/metfrag
 ```
-
-### Rancher Web GUI
-
-In the GUI you follow similar steps, adding the Catalog first:
-
-![Adding the GitHub with IPB charts](images/ScreenshotCatalogAdd.png)
-
-Then you can search for MetFrag
-![Apps available for installation](images/ScreenshotAppInstall1.png)
-
-and install
-![Customise and Install MetFrag](images/ScreenshotAppInstall2.png)

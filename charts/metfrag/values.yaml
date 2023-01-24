@@ -24,14 +24,12 @@ postgresql:
   fullnameOverride: "metfrag-postgresql"
   postgresqlPassword: "secretpassword"
   postgresqlDatabase: "metchem"
-  persistence:
-    enabled: yes
-    size: "80Gi"
-#    storageClassName: "nfs-client"
-  initdbScriptsConfigMap: configmapscripts
-
-#  initdbScriptsConfigMap: configmapscripts
-
+  primary:
+    persistence:
+      enabled: yes
+      size: "80Gi"
+    initdb:
+      scriptsConfigMap: configmapscripts
 
 imagePullSecrets: []
 nameOverride: ""
