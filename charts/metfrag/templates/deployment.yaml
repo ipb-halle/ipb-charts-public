@@ -33,9 +33,10 @@ spec:
           volumeMounts:
             - name: metfrag-settings
               mountPath: /resources/
+            {{- if .Values.storage }}
             - name: spectral-databases
               mountPath: /vol/spectral-databases
-
+            {{- end }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -66,7 +67,9 @@ spec:
              items:
               - key: settings.properties
                 path: settings.properties
+        {{- if .Values.storage }}
         {{- toYaml .Values.storage.volumes | nindent 8 }}
+        {{- end }}
 
       {{- with .Values.nodeSelector }}
       nodeSelector:

@@ -18,5 +18,5 @@ data:
     LocalMetChemDatabasePassword=metchemro
     # local database file folder
     LocalDatabasesFolderForWeb = /vol/file_databases
-    # Spectral library folder
+    # Spectral library folder. If missing, built-in MoNA snapshot will be used
     OfflineSpectralDatabaseFile = /vol/spectral-databases

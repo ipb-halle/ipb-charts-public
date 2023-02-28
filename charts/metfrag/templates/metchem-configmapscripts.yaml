@@ -5,7 +5,7 @@ metadata:
 data:
   setup.sh: |
     #!/bin/bash
-    echo "Hi!" >/tmp/configmapscript
+    date >>/tmp/configmapscript
     sleep 30
     export PGPASSWORD=secretpassword
     echo "before prep-metchem" >>/tmp/configmapscript

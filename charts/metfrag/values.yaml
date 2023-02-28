@@ -15,10 +15,10 @@ image:
   repository: ipbhalle/metfragweb
   pullPolicy: Always
 
-storage:
-  volumes:
-    - name: spectral-databases
-      emptyDir: {}
+#storage:
+#  volumes:
+#    - name: spectral-databases
+#      emptyDir: {}
 
 postgresql:
   fullnameOverride: "metfrag-postgresql"
