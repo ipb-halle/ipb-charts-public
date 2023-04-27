@@ -3,6 +3,17 @@ entries:
   goldenmutagenesis:
   - apiVersion: v2
     appVersion: latest
+    created: "2023-04-27T20:24:40.576336902Z"
+    description: A Helm chart for GoldenMutagenesisWeb, supporting rapid design of primers for amino acid exchanges and saturation mutagenesis by Golden Gate cloning
+    digest: f567d52ee9ce3d3ef884b16272251ac80cdf88a4a84d48c1419100eb86e4bddd
+    icon: https://msbi.ipb-halle.de/gmweb_logo128x128.png
+    name: goldenmutagenesis
+    type: application
+    urls:
+    - https://github.com/ipb-halle/ipb-charts-public/releases/download/goldenmutagenesis-0.1.5/goldenmutagenesis-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-12-15T16:39:59.913808779Z"
     description: A Helm chart for GoldenMutagenesisWeb, supporting rapid design of primers for amino acid exchanges and saturation mutagenesis by Golden Gate cloning
     digest: d768a75f1685695f8dd6378e23f873c581c1b12582a61b58aeb449e0ef75ae16
