@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.RESTname }}
+  labels:
+    {{- include "metfragrest.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaRESTCount }}
+  selector:
+    matchLabels:
+      {{- include "metfragrest.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "metfragrest.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "metfrag.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: postgres-listener
+          image: alpine
+          command:
+            - sh
+            - -c
+            - for i in $(seq 1 200); do nc -z -w3 metfrag-postgresql 5432 && exit 0 || sleep $((2*i)); echo -n "." ; done; exit 1
+      containers:
+        - name: {{ .Values.RESTname }}
+          volumeMounts:
+            - name: metfrag-settings
+              mountPath: /resources/
+            {{- if .Values.storage }}
+            - name: spectral-databases
+              mountPath: /vol/spectral-databases
+            {{- end }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.imageREST.repository }}:{{ .Values.imageREST.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.imageREST.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: {{ trimSuffix "/" .Values.RESTpath }}/javax.faces.resource/images/MetLogoCube_Green.png.xhtml
+          #     port: 8080
+          # readinessProbe:
+          #   httpGet:
+          #     path: {{ trimSuffix "/" .Values.RESTpath }}/javax.faces.resource/images/MetLogoCube_Green.png.xhtml
+          #     port: 8080
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: RESTPREFIX
+              value: {{ .Values.webRESTpath }}
+            - name: JAVA_OPTS
+              value: -Xmx4g -Xms4g
+      volumes:
+        - name: metfrag-settings
+          configMap:
+             name: metfrag-settings
+             items:
+              - key: settings.properties
+                path: settings.properties
+        {{- if .Values.storage }}
+        {{- toYaml .Values.storage.volumes | nindent 8 }}
+        {{- end }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

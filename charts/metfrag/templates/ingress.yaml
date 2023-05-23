@@ -37,4 +37,12 @@ spec:
               name: {{ $fullName }}
               port:
                 number: {{ $svcPort }}
+        - path: {{ .Values.RESTpath }}
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Values.RESTname }}
+              port:
+                number: {{ $svcPort }}
+
 {{- end }}

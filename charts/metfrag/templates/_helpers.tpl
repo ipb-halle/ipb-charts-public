@@ -24,6 +24,19 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 {{- end -}}
 
+{{- define "metfragrest.fullname" -}}
+{{- if .Values.fullnameRESTOverride -}}
+{{- .Values.fullnameRESTOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.nameRESTOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
 {{/*
 Create chart name and version as used by the chart label.
 */}}
@@ -44,11 +57,31 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common labels
+*/}}
+{{- define "metfragrest.labels" -}}
+helm.sh/chart: {{ include "metfrag.chart" . }}
+{{ include "metfragrest.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "metfrag.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "metfrag.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Selector labels
+*/}}
+{{- define "metfragrest.selectorLabels" -}}
+app.kubernetes.io/name: {{ .Values.RESTname }}
+app.kubernetes.io/instance: {{ .Values.RESTname }}
 {{- end -}}
 
 {{/*
