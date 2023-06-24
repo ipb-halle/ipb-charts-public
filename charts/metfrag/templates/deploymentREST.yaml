@@ -56,8 +56,12 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            - name: METFRAGREST_CONTROLLER_PATH
+            - name: SERVER_SERVLET_CONTEXT_PATH
               value: {{ .Values.RESTpath }}
+            # - name: METFRAGREST_SERVICE_HOST
+            #   value: msbi.ipb-halle.de
+            # - name: METFRAG_SERVICE_HOST
+            #   value: msbi.ipb-halle.de
             - name: JAVA_OPTS
               value: -Xmx4g -Xms4g
       volumes:

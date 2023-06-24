@@ -30,18 +30,18 @@ spec:
   - host: {{ index .Values.ingress.hosts 0 "host"| quote }}
     http:
       paths:
-        - path: {{ .Values.webpath }}
-          pathType: Prefix
-          backend:
-            service:
-              name: {{ $fullName }}
-              port:
-                number: {{ $svcPort }}
         - path: {{ .Values.RESTpath }}
           pathType: Prefix
           backend:
             service:
               name: {{ .Values.RESTname }}
+              port:
+                number: {{ $svcPort }}
+        - path: {{ .Values.webpath }}
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ $fullName }}
               port:
                 number: {{ $svcPort }}
 
