@@ -34,8 +34,20 @@ spec:
             - name: metfrag-settings
               mountPath: /resources/
             {{- if .Values.storage }}
-            - name: spectral-databases
-              mountPath: /vol/spectral-databases
+            {{- $targetName := "spectral-databases" -}}
+            {{- range .Values.storage.volumes }}
+              {{- if eq .name $targetName }}
+            - name: {{ $targetName }}
+              mountPath: /vol/{{ $targetName }}
+              {{- end }}
+            {{- end }}
+            {{- $targetName := "candidate-databases" -}}
+            {{- range .Values.storage.volumes }}
+              {{- if eq .name $targetName }}
+            - name: {{ $targetName }}
+              mountPath: /vol/{{ $targetName }}
+              {{- end }}
+            {{- end }}
             {{- end }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}

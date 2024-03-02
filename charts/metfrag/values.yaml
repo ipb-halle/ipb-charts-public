@@ -27,6 +27,9 @@ imageREST:
 #  volumes:
 #    - name: spectral-databases
 #      emptyDir: {}
+#    - name: candidate-databases
+#      emptyDir: {}
+
 
 postgresql:
   fullnameOverride: "metfrag-postgresql"
