@@ -81,6 +81,21 @@ entries:
   metfrag:
   - apiVersion: v2
     appVersion: latest
+    created: "2024-09-05T13:29:28.449753326Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.26
+    description: A Helm chart for the MetFrag application
+    digest: 8a50f09fd1167b742bbdb990e60068f82c8199ff7787ded868a3f8502f91af69
+    icon: https://msbi.ipb-halle.de/MetFragLogo232x128.png
+    name: metfrag
+    type: application
+    urls:
+    - https://github.com/ipb-halle/ipb-charts-public/releases/download/metfrag-0.1.21/metfrag-0.1.21.tgz
+    version: 0.1.21
+  - apiVersion: v2
+    appVersion: latest
     created: "2023-06-24T14:50:49.846702115Z"
     dependencies:
     - name: postgresql
@@ -289,4 +304,15 @@ entries:
     urls:
     - https://github.com/ipb-halle/ipb-charts-public/releases/download/metfrag-0.1.6/metfrag-0.1.6.tgz
     version: 0.1.6
+  metigel:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-09-05T13:29:28.571893661Z"
+    description: MetIgel is a post-processing software for the chemical classification, data visualization, and statistical analysis of annotated feature tables from metabolomics analyses.
+    digest: fb63588e00c183ae3d3b686c1003836081349de926e3d779b039c639cc046b44
+    name: metigel
+    type: application
+    urls:
+    - https://github.com/ipb-halle/ipb-charts-public/releases/download/metigel-0.1.0/metigel-0.1.0.tgz
+    version: 0.1.0
 generated: "2021-12-14T19:58:51.795384367Z"
