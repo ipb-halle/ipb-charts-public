@@ -42,26 +42,32 @@ postgres:
   initdb:
     scriptsConfigMap: configmapscripts
   initContainers:
-    - name: download-sql-dumps
-      image: busybox:1.36
+    - name: install-wget
+      image: docker.io/postgres:18.1@sha256:0033c194dc640cc4dcc62ef7c3117e5791365cca5fc1a2998e5c1693254784bc
       command:
         - sh
         - -c
         - |
-          echo "Downloading SQL dump files..."
-          wget -O /sql-dumps/prep-metchem-2016.sql.gz https://msbi.ipb-halle.de/~sneumann/prep-metchem-2016.sql.gz
-          wget -O /sql-dumps/metchem-2016.sql.gz https://msbi.ipb-halle.de/~sneumann/metchem-2016.sql.gz
-          echo "SQL dumps downloaded successfully"
-          ls -lh /sql-dumps/
+          echo "Installing wget for database initialization..."
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update -qq
+          apt-get install -y -qq wget ca-certificates
+          # Copy wget binary to a shared location
+          cp /usr/bin/wget /shared-bin/wget
+          cp -r /usr/lib/x86_64-linux-gnu/libpsl* /shared-bin/ 2>/dev/null || true
+          echo "wget installed and copied to shared location"
       volumeMounts:
-        - name: sql-dumps
-          mountPath: /sql-dumps
+        - name: shared-bin
+          mountPath: /shared-bin
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
   extraVolumes:
-    - name: sql-dumps
+    - name: shared-bin
       emptyDir: {}
   extraVolumeMounts:
-    - name: sql-dumps
-      mountPath: /sql-dumps
+    - name: shared-bin
+      mountPath: /shared-bin
 
 imagePullSecrets: []
 nameOverride: ""

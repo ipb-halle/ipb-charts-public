@@ -9,18 +9,21 @@ data:
     
     echo "Starting metchem database initialization..."
     
-    # Check if SQL dumps are available
-    if [ ! -f /sql-dumps/prep-metchem-2016.sql.gz ] || [ ! -f /sql-dumps/metchem-2016.sql.gz ]; then
-        echo "ERROR: SQL dump files not found in /sql-dumps/"
+    # Use wget from shared location
+    WGET="/shared-bin/wget"
+    
+    # Check if wget is available
+    if [ ! -x "$WGET" ]; then
+        echo "ERROR: wget not found at $WGET"
         exit 1
     fi
     
-    # Load prep-metchem SQL dump into postgres database
+    # Download and load prep-metchem SQL dump into postgres database (streaming - no local storage)
     echo "Loading prep-metchem data into postgres database..."
-    zcat /sql-dumps/prep-metchem-2016.sql.gz | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres
+    $WGET -q -O - https://msbi.ipb-halle.de/~sneumann/prep-metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres
     
-    # Load metchem SQL dump into metchem database
+    # Download and load metchem SQL dump into metchem database (streaming - no local storage)
     echo "Loading metchem data into metchem database..."
-    zcat /sql-dumps/metchem-2016.sql.gz | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres -d metchem
+    $WGET -q -O - https://msbi.ipb-halle.de/~sneumann/metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres -d metchem
     
     echo "Database initialization completed successfully."
