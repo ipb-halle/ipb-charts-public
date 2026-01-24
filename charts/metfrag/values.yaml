@@ -41,6 +41,27 @@ postgres:
     size: "80Gi"
   initdb:
     scriptsConfigMap: configmapscripts
+  initContainers:
+    - name: download-sql-dumps
+      image: busybox:1.36
+      command:
+        - sh
+        - -c
+        - |
+          echo "Downloading SQL dump files..."
+          wget -O /sql-dumps/prep-metchem-2016.sql.gz https://msbi.ipb-halle.de/~sneumann/prep-metchem-2016.sql.gz
+          wget -O /sql-dumps/metchem-2016.sql.gz https://msbi.ipb-halle.de/~sneumann/metchem-2016.sql.gz
+          echo "SQL dumps downloaded successfully"
+          ls -lh /sql-dumps/
+      volumeMounts:
+        - name: sql-dumps
+          mountPath: /sql-dumps
+  extraVolumes:
+    - name: sql-dumps
+      emptyDir: {}
+  extraVolumeMounts:
+    - name: sql-dumps
+      mountPath: /sql-dumps
 
 imagePullSecrets: []
 nameOverride: ""
