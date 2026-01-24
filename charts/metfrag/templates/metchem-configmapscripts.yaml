@@ -20,10 +20,10 @@ data:
     
     # Download and load prep-metchem SQL dump into postgres database (streaming - no local storage)
     echo "Loading prep-metchem data into postgres database..."
-    $WGET -q -O - https://msbi.ipb-halle.de/~sneumann/prep-metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres
+    $WGET --no-check-certificate -q -O - https://msbi.ipb-halle.de/~sneumann/prep-metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres
     
     # Download and load metchem SQL dump into metchem database (streaming - no local storage)
     echo "Loading metchem data into metchem database..."
-    $WGET -q -O - https://msbi.ipb-halle.de/~sneumann/metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres -d metchem
+    $WGET --no-check-certificate -q -O - https://msbi.ipb-halle.de/~sneumann/metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres -d metchem
     
     echo "Database initialization completed successfully."
