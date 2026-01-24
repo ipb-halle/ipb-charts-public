@@ -31,16 +31,16 @@ imageREST:
 #      emptyDir: {}
 
 
-postgresql:
+postgres:
   fullnameOverride: "metfrag-postgresql"
-  postgresqlPassword: "secretpassword"
-  postgresqlDatabase: "metchem"
-  primary:
-    persistence:
-      enabled: yes
-      size: "80Gi"
-    initdb:
-      scriptsConfigMap: configmapscripts
+  auth:
+    password: "secretpassword"
+    database: "metchem"
+  persistence:
+    enabled: yes
+    size: "80Gi"
+  initdb:
+    scriptsConfigMap: configmapscripts
 
 imagePullSecrets: []
 nameOverride: ""
