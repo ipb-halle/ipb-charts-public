@@ -11,10 +11,10 @@ data:
     
     # Download and load prep-metchem SQL dump into postgres database
     echo "Loading prep-metchem data into postgres database..."
-    curl --output - https://msbi.ipb-halle.de/~sneumann/prep-metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres
+    curl --fail --output - https://msbi.ipb-halle.de/~sneumann/prep-metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres
     
     # Download and load metchem SQL dump into metchem database
     echo "Loading metchem data into metchem database..."
-    curl --output - https://msbi.ipb-halle.de/~sneumann/metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres -d metchem
+    curl --fail --output - https://msbi.ipb-halle.de/~sneumann/metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres -d metchem
     
     echo "Database initialization completed successfully."
