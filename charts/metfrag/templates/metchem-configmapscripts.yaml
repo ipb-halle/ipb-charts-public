@@ -3,13 +3,27 @@ kind: ConfigMap
 metadata:
   name: configmapscripts
 data:
-  setup.sh: |
+  01-init-metchem.sh: |
     #!/bin/bash
-    date >>/tmp/configmapscript
-    sleep 30
-    export PGPASSWORD=secretpassword
-    echo "before prep-metchem" >>/tmp/configmapscript
-    curl --output - https://msbi.ipb-halle.de/~sneumann/prep-metchem-2016.sql.gz | zcat | psql --host 127.0.0.1 -U postgres
-    echo "before metchem" >>/tmp/configmapscript
-    curl --output - https://msbi.ipb-halle.de/~sneumann/metchem-2016.sql.gz | zcat | psql --host 127.0.0.1 -U postgres metchem
-    echo "after metchem" >>/tmp/configmapscript
+    set -e
+    
+    echo "Starting metchem database initialization..."
+    
+    # Use wget from shared location
+    WGET="/shared-bin/wget"
+    
+    # Check if wget is available
+    if [ ! -x "$WGET" ]; then
+        echo "ERROR: wget not found at $WGET"
+        exit 1
+    fi
+    
+    # Download and load prep-metchem SQL dump into postgres database (streaming - no local storage)
+    echo "Loading prep-metchem data into postgres database..."
+    $WGET --no-check-certificate -q -O - https://msbi.ipb-halle.de/~sneumann/prep-metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres
+    
+    # Download and load metchem SQL dump into metchem database (streaming - no local storage)
+    echo "Loading metchem data into metchem database..."
+    $WGET --no-check-certificate -q -O - https://msbi.ipb-halle.de/~sneumann/metchem-2016.sql.gz | zcat | PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres -d metchem
+    
+    echo "Database initialization completed successfully."

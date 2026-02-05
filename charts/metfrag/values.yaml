@@ -31,16 +31,49 @@ imageREST:
 #      emptyDir: {}
 
 
-postgresql:
+postgres:
   fullnameOverride: "metfrag-postgresql"
-  postgresqlPassword: "secretpassword"
-  postgresqlDatabase: "metchem"
-  primary:
-    persistence:
-      enabled: yes
-      size: "80Gi"
-    initdb:
-      scriptsConfigMap: configmapscripts
+  auth:
+    password: "secretpassword"
+    database: "metchem"
+  persistence:
+    enabled: yes
+    size: "80Gi"
+  initdb:
+    scriptsConfigMap: configmapscripts
+  # Increase startup probe timeout for large database initialization (80GB download and load)
+  startupProbe:
+    enabled: true
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 180  # 30 minutes: 30s initial + (180 * 10s) = 1830s total
+    successThreshold: 1
+  initContainers:
+    - name: install-wget
+      image: busybox:1.36
+      command:
+        - sh
+        - -c
+        - |
+          echo "Copying wget for database initialization..."
+          # busybox wget is statically linked, so it has no library dependencies
+          cp /bin/wget /shared-bin/wget
+          chmod +x /shared-bin/wget
+          echo "wget copied to shared location"
+          /shared-bin/wget --version || echo "wget verification failed"
+      volumeMounts:
+        - name: shared-bin
+          mountPath: /shared-bin
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+  extraVolumes:
+    - name: shared-bin
+      emptyDir: {}
+  extraVolumeMounts:
+    - name: shared-bin
+      mountPath: /shared-bin
 
 imagePullSecrets: []
 nameOverride: ""
